@@ -3,11 +3,13 @@ const moviesController = require('../controllers/moviesController');
 
 const router = express.Router();
 
+router.param('id', moviesController.checkId);
+
 router
     .route('/')
     .get(moviesController.getALLmovies)
-    .post(moviesController.createMovie);
-
+    .post(moviesController.validateBody, moviesController.createMovie);
+ 
 router
     .route('/:id')
     .get(moviesController.getOneMovie)
